@@ -1,0 +1,39 @@
+import argv
+import file_streams/file_stream.{type FileStream}
+import gleam/int
+import gleam/io
+
+type InputLine =
+  String
+
+type InputType =
+  List(InputLine)
+
+fn read_lines(stream: FileStream, input: InputType) -> InputType {
+  case file_stream.read_line(stream) {
+    Ok(line) -> read_lines(stream, [line, ..input])
+    _ -> input
+  }
+}
+
+fn part_1(input: InputType) -> Int {
+  0
+}
+
+fn part_2(input: InputType) -> Int {
+  0
+}
+
+pub fn main() {
+  let filename = case argv.load().arguments {
+    [filename, ..] -> filename
+    _ -> "input.txt"
+  }
+  let assert Ok(stream) = file_stream.open_read(filename)
+  // use this line if the order of the input is important!
+  // let lines = list.reverse(read_lines(stream, []))
+  let lines = read_lines(stream, [])
+
+  io.println("part1={" <> int.to_string(part_1(lines)) <> "}")
+  io.println("part2={" <> int.to_string(part_2(lines)) <> "}")
+}

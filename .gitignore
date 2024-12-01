@@ -1,0 +1,8 @@
+*.beam
+*.ez
+/build
+erl_crash.dump
+.aoc
+input.txt
+example.txt
+example2.txt
