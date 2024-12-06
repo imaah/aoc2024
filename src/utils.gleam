@@ -23,3 +23,9 @@ pub fn at_index(l: List(a), index: Int) -> Result(a, Nil) {
     Error(_) -> Error(Nil)
   }
 }
+
+pub fn defer(defer_func: fn() -> b, action: fn() -> a) -> a {
+  let result = action()
+  defer_func()
+  result
+}
