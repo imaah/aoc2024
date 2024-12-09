@@ -3,24 +3,21 @@ import file_streams/file_stream.{type FileStream}
 import gleam/int
 import gleam/io
 
-type InputLine =
-  String
+type Input =
+  List(String)
 
-type InputType =
-  List(InputLine)
-
-fn read_lines(stream: FileStream, input: InputType) -> InputType {
+fn read_lines(stream: FileStream, input: Input) -> InputType {
   case file_stream.read_line(stream) {
     Ok(line) -> read_lines(stream, [line, ..input])
     _ -> input
   }
 }
 
-fn part_1(input: InputType) -> Int {
+fn part_1(input: Input) -> Int {
   0
 }
 
-fn part_2(input: InputType) -> Int {
+fn part_2(input: Input) -> Int {
   0
 }
 
