@@ -5,6 +5,7 @@ import gleam/io
 import gleam/list
 import gleam/result
 import gleam/string
+import utils
 
 type InputLine {
   Line(value: Int, nums: List(Int))
@@ -49,12 +50,6 @@ fn part_1(input: Input) -> Int {
   |> list.fold(0, fn(acc, v) { acc + v })
 }
 
-fn concat(a: Int, b: Int) -> Int {
-  { int.to_string(a) <> int.to_string(b) }
-  |> int.parse()
-  |> result.unwrap(0)
-}
-
 fn is_solvable_with_concat(current: Int, line: InputLine) -> Bool {
   case line {
     Line(n, []) -> current == n
@@ -62,7 +57,10 @@ fn is_solvable_with_concat(current: Int, line: InputLine) -> Bool {
     Line(n, [first, ..rest]) ->
       is_solvable_with_concat(current + first, Line(n, rest))
       || is_solvable_with_concat(current * first, Line(n, rest))
-      || is_solvable_with_concat(concat(current, first), Line(n, rest))
+      || is_solvable_with_concat(
+        utils.concat_int(current, first),
+        Line(n, rest),
+      )
   }
 }
 

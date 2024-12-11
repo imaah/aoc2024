@@ -6,9 +6,9 @@ import gleam/io
 type Input =
   List(String)
 
-fn read_lines(stream: FileStream, input: Input) -> InputType {
+fn read_lines(stream: FileStream) -> Input {
   case file_stream.read_line(stream) {
-    Ok(line) -> read_lines(stream, [line, ..input])
+    Ok(line) -> [line, ..read_lines(stream)]
     _ -> input
   }
 }
@@ -27,9 +27,8 @@ pub fn main() {
     _ -> "input.txt"
   }
   let assert Ok(stream) = file_stream.open_read(filename)
-  // use this line if the order of the input is important!
-  // let lines = list.reverse(read_lines(stream, []))
-  let lines = read_lines(stream, [])
+
+  let lines = read_lines(stream)
 
   io.println("part1={" <> int.to_string(part_1(lines)) <> "}")
   io.println("part2={" <> int.to_string(part_2(lines)) <> "}")
