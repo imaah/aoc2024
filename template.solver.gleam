@@ -9,7 +9,7 @@ type Input =
 fn read_lines(stream: FileStream) -> Input {
   case file_stream.read_line(stream) {
     Ok(line) -> [line, ..read_lines(stream)]
-    _ -> input
+    _ -> []
   }
 }
 
