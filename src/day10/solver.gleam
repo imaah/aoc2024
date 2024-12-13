@@ -8,7 +8,6 @@ import gleam/list
 import gleam/result
 import gleam/set.{type Set}
 import gleam/string
-import gleam/yielder
 
 type Input =
   List(List(Int))
