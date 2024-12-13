@@ -18,7 +18,7 @@ pub fn timeit(fun: fn() -> a) -> a {
 pub fn at_index(l: List(a), index: Int) -> Result(a, Nil) {
   case list.pop(l, fn(_) { True }) {
     Ok(#(first, rest)) -> {
-      case index - 1 {
+      case index {
         0 -> Ok(first)
         _ -> at_index(rest, index - 1)
       }
